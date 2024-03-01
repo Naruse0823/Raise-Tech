@@ -4,5 +4,5 @@
 - DBサーバ：MySQL 8.0.36
 - Railsの構成管理ツール：Bundler
 - エビデンス画像 
-- ![lecture03 evidence](/image/lecture03 evidence.png)
+![lecture03 evidence.png](image/lecture03 evidence.png)
 - なんとかサンプルアプリを起動することができ、ほっとしました。しかし、それぞれがどういった役割のものなのかまではよく分かっていないので、一つずつ調べて理解していきたい。だが、文字だけでは分からないと思うので、これ以降の課題だけでなく、他のことにも実際に手を動かしながら挑戦して、体験的に理解していきたい。
