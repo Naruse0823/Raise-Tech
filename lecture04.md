@@ -5,8 +5,14 @@
 - EC2
 ![EC2(1)](images/lecture4-2-1.png)
 ![EC2(2)](images/lecture4-2-2.png)
+- EC2　セキュリティグループ
+![EC2セキュリティグループ　インバウンド](images/lecture4-5-1.png)
+![EC2セキュリティグループ　アウトバウンド](images/lecture4-5-2.png)
 - RDS
 ![RDS](images/lecture4-3.png)
+- RDS　セキュリティグループ
+![RDSセキュリティグループ　インバウンド](images/lecture4-6-1.png)
+![RDSセキュリティグループ　アウトバウンド](images/lecture4-6-1.png)
 - EC2からRDSへ接続
 ![接続](images/lecture4-4.png)
 
