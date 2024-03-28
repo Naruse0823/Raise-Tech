@@ -13,6 +13,8 @@
 - RDS　セキュリティグループ
 ![RDSセキュリティグループ　インバウンド](images/lecture4-6-1.png)
 ![RDSセキュリティグループ　アウトバウンド](images/lecture4-6-1.png)
+- RDS サブネット変更
+![RDSサブネット変更](images/lecture4-7.png)
 - EC2からRDSへ接続
 ![接続](images/lecture4-4.png)
 
