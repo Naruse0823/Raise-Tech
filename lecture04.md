@@ -15,6 +15,9 @@
 ![RDSセキュリティグループ　アウトバウンド](images/lecture4-6-1.png)
 - RDS サブネット変更
 ![RDSサブネット変更](images/lecture4-7.png)
+![RDSサブネット](images/lecture4-10.png)
+![RDSパブリックサブネット](images/lecture4-9.png)
+![RDSプライベートサブネット](images/lecture4-8.png)
 - EC2からRDSへ接続
 ![接続](images/lecture4-4.png)
 
