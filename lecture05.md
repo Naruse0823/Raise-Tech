@@ -15,9 +15,8 @@
 ## railsアプリの画像の保存先をS3に変更
 ![S3バケット作成](images/lecture05-6(1).png)
 ![IAMロール](images/lecture05-6(2).png)
-![ポリシー](images/lecture05-6(3).png)
+![IAMのポリシー](images/lecture05-6(3).png)
 ![EC2に付与](images/lecture05-6(4).png)
-![バケットポリシー](images/lecture05-6(5).png)
 ![接続確認](images/lecture05-6(6).png)
 ![保存確認](images/lecture05-6(7).png)
 ![小](images/lecture05-6(8).png)
