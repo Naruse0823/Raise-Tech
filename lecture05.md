@@ -18,7 +18,7 @@
 ![ALB作成](images/lecture05-5(1).png)
 - ヘルスチェック
 ![target](images/lecture05-5(2).png)
-- 起動確認
+- DNSで起動確認
 ![接続](images/lecture05-5(3).png)
 ## railsアプリの画像の保存先をS3に変更
 - S3バケット作成
@@ -29,7 +29,7 @@
 ![IAMのポリシー](images/lecture05-6(3).png)
 - EC2にIAMロール付与
 ![EC2に付与](images/lecture05-6(4).png)
-- DNSで起動確認
+- 起動確認
 ![接続確認](images/lecture05-6(6).png)
 - railsアプリの画像保存先をS3に変更
 ![保存確認](images/lecture05-6(7).png)
