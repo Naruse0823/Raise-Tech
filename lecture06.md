@@ -3,7 +3,7 @@
 - イベント名  
 ConsoleLogin→ユーザー認証  
 - 内容  
-"eventTime": "2024-07-07T04:01:38Z"→2024年7月7日04時01分38秒（UTC）  　
+"eventTime": "2024-07-07T04:01:38Z"→2024年7月7日04時01分38秒（UTC）  
 "eventSource": "signin.amazonaws.com"→AWSアカウントにログイン  
 "awsRegion": "ap-northeast-1"→東京リージョン  
 ![CloudTrail1](images/lecture06-1(1).png)
