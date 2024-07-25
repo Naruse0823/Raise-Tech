@@ -1,0 +1,103 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: TargetGroup, SecurityGroup and ALB create
+
+Parameters:
+ NameBase: 
+  Description: this is base name.
+  Type: String
+  Default: raisetech2-lecture10
+
+
+Resources:
+ # TargetGroup
+ TargetGroup: 
+  Type: "AWS::ElasticLoadBalancingV2::TargetGroup"
+  Properties: 
+    VpcId: !ImportValue lecture10-VPC-VPCId
+    Name: !Sub "${NameBase}-tg"
+    IpAddressType: ipv4
+    # ターゲットにトラフィックをルーティングするために使用するプロトコル
+    Protocol: HTTP
+    ProtocolVersion: HTTP1
+    Port: 80
+    TargetType: instance
+    Targets: 
+      - Id: !ImportValue lecture10-EC2-EC2Id
+        Port: 80
+    # ヘルスチェックを有効化
+    HealthCheckEnabled: true
+    # ヘルスチェックプロトコル（ターゲットでヘルスチェックを実行するときにロードバランサーが使用するプロトコル）
+    HealthCheckProtocol: HTTP
+    # ヘルスチェックパス(ヘルスチェックのターゲットの送信先)
+    HealthCheckPath: "/"
+    # ヘルスチェックポート(ターゲットでヘルスチェックを実行するときにロードバランサーが使用するポート)
+    HealthCheckPort: "traffic-port"
+    # 正常のしきい値(非正常なインスタンスが正常であると見なすまでに必要なヘルスチェックの連続成功回数)
+    HealthyThresholdCount: 5
+    # 非正常のしきい値(ターゲットが異常であると見なされるまでに必要なヘルスチェックの連続失敗回数)
+    UnhealthyThresholdCount: 2
+    # タイムアウト(ヘルスチェックを失敗と見なす、ターゲットからレスポンスがない時間)
+    HealthCheckTimeoutSeconds: 5
+    # 間隔(個々のターゲットのヘルスチェックの概算間隔)
+    HealthCheckIntervalSeconds: 30
+    # 成功コード(ターゲットからの正常なレスポンスを確認するために使用するHTTPコード)
+    Matcher: 
+      HttpCode: 200
+    Tags: 
+      - Key: Name
+        Value: !Sub "${NameBase}-tg"
+
+
+ # ALB
+ ALB: 
+    Type: "AWS::ElasticLoadBalancingV2::LoadBalancer"
+    Properties: 
+      Name: !Sub "${NameBase}-alb"
+      Tags: 
+        - Key: Name
+          Value: !Sub "${NameBase}-alb"
+      # ロードバランサの種類
+      Type: application
+      # スキーム(内部向けかインターネット向けか)
+      Scheme: "internet-facing"
+      # ロードバランサーの IP アドレスタイプ
+      IpAddressType: ipv4
+      SecurityGroups:
+        - !Ref ALBSecurityGroup
+      Subnets: 
+        - !ImportValue lecture10-VPC-PublicSubnet1Id
+        - !ImportValue lecture10-VPC-PublicSubnet2Id
+
+
+ # リスナー設定
+ ALBListener: 
+    Type: "AWS::ElasticLoadBalancingV2::Listener"
+    Properties: 
+      LoadBalancerArn: !Ref ALB
+      Port: 80
+      Protocol: HTTP
+      # デフォルトアクション(リクエストをルーティングするためのデフォルトのルールを指定)
+      DefaultActions:
+        - TargetGroupArn: !Ref TargetGroup
+          # ルールアクションタイプ
+          # forwardは指定されたターゲットグループにリクエストを転送
+          Type: forward
+      
+
+
+ # ALBSecurityGroup
+ ALBSecurityGroup:
+  Type: "AWS::EC2::SecurityGroup"
+  Properties:
+    VpcId: !ImportValue lecture10-VPC-VPCId
+    GroupDescription: Allow HTTP access
+    GroupName: !Sub "${NameBase}-alb-sg"
+    Tags:
+        - Key: Name
+          Value: !Sub "${NameBase}-alb-sg"
+ # インバウンドルール
+    SecurityGroupIngress: 
+     - IpProtocol: tcp
+       FromPort: 80
+       ToPort: 80
+       CidrIp: 0.0.0.0/0

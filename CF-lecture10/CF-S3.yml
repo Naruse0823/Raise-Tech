@@ -1,0 +1,30 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: Create S3 Bucket
+
+
+Resources:
+  S3Bucket:
+    # S3バケット作成
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: lecture10-test
+      # 暗号化についての設定
+      BucketEncryption:
+        ServerSideEncryptionConfiguration: 
+          # 暗号化にはS3管理のSSE-S3を使用するように設定
+          # バケットキーの有効化
+          - ServerSideEncryptionByDefault: 
+              SSEAlgorithm: AES256
+            BucketKeyEnabled: true
+      # パブリックアクセスをすべて無効化
+      PublicAccessBlockConfiguration: 
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      # バージョニング設定の無効化
+      VersioningConfiguration:
+        Status: Suspended 
+      Tags:
+        - Key: Name
+          Value: lecture10-test

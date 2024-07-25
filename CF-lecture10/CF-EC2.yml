@@ -1,0 +1,88 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: EC2 and sg create with IAM role
+
+
+Parameters:
+ NameBase: 
+  Description: this is base name.
+  Type: String
+  Default: raisetech2
+
+ KeyName:
+  Description: "The name of the EC2 Key Pair"
+  Type: AWS::EC2::KeyPair::KeyName
+  ConstraintDescription: "Must be the name of an existing EC2 Key Pair."
+
+ MyCidrIp:
+  NoEcho: 'true'
+  Type: String
+  Default: ""
+
+
+Resources: 
+ # SecurityGroup
+ EC2SecurityGroup:
+  Type: AWS::EC2::SecurityGroup
+  Properties:
+    GroupDescription: Allow SSH and HTTP access
+    VpcId: !ImportValue lecture10-VPC-VPCId
+    Tags:
+        - Key: Name
+          Value: !Sub "sg-ec2-lecture10-${NameBase}"
+    # インバウンドルール
+    SecurityGroupIngress: 
+     # ssh
+     - IpProtocol: tcp
+       FromPort: 22
+       ToPort: 22
+       CidrIp: !Ref MyCidrIp
+     
+     # HTTP
+     - IpProtocol: tcp
+       FromPort: 80
+       ToPort: 80
+       CidrIp: 0.0.0.0/0
+
+
+ # EC2
+ EC2:
+  Type: AWS::EC2::Instance
+  Properties:
+    # AmazonLinux2 AMI ID
+    ImageId: ami-0eda63ec8af4f056e
+    # keypair
+    KeyName: !Ref KeyName
+    InstanceType: "t2.micro" 
+    NetworkInterfaces: 
+     - AssociatePublicIpAddress: "true" 
+       DeviceIndex: "0"
+       GroupSet:
+        -  !Ref EC2SecurityGroup
+       SubnetId: !ImportValue lecture10-VPC-PublicSubnet1Id
+    BlockDeviceMappings: 
+     - DeviceName: /dev/xvda
+       Ebs:
+         VolumeType: gp2
+         DeleteOnTermination: true
+         VolumeSize: 16
+    # IAMロールアタッチ
+    IamInstanceProfile: !Ref InstanceProfile
+    Tags:
+     - Key: Name
+       Value: !Sub "ec2-lecture10-${NameBase}"
+
+
+ # IAM Instance Profile
+ InstanceProfile:
+  Type: AWS::IAM::InstanceProfile
+  Properties: 
+    Roles: 
+      - "raisetech-lecture05-ec2"
+
+
+Outputs: 
+ EC2Id: 
+  Description: "The ID of the created EC2 instance"
+  Value: !Ref EC2
+  Export:
+   Name: !Sub "${AWS::StackName}-EC2Id"
