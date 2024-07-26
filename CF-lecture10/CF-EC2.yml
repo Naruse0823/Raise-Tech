@@ -16,7 +16,7 @@ Parameters:
  MyCidrIp:
   NoEcho: true
   Type: String
-  Default: ""
+  Description: Enter the CIDR IP for the security group ingress rule
 
 
 Resources: 
