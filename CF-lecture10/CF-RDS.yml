@@ -5,50 +5,44 @@ Description: RDS for  MySQL Create
 Parameters:
  
   DBPassword:
-    NoEcho: 'true'
+    NoEcho: true
     Type: String
-    MinLength: '8'
-    MaxLength: '41'
+    MinLength: 8
+    MaxLength: 41
 
   KmsKeyArn:
-    NoEcho: "true"
+    NoEcho: true
     Type: String
-    Default: ''
-
-  SubnetId1:
-    Type: AWS::EC2::Subnet::Id
-
-  SubnetId2:
-    Type: AWS::EC2::Subnet::Id
+    Default: ""
 
 
 Resources:
   # サブネットグループ作成
   RDSSubnetGroup:
-    Type: "AWS::RDS::DBSubnetGroup"
+    Type: AWS::RDS::DBSubnetGroup
     Properties:
-      DBSubnetGroupDescription: "For RDS"
-      DBSubnetGroupName: "raisetech2-lecture10-DBSubnetGroup"
+      DBSubnetGroupDescription: For RDS
+      DBSubnetGroupName: raisetech2-lecture10-DBSubnetGroup
       SubnetIds:
-      - !Ref SubnetId1
-      - !Ref SubnetId2
+      - !ImportValue lecture10-VPC-PrivateSubnet1Id
+      - !ImportValue lecture10-VPC-PrivateSubnet2Id
       Tags:
-      - Key: "Name"
-        Value: "raisetech2-lecture10-DBSubnetGroup"
+      - Key: Name
+        Value: raisetech2-lecture10-DBSubnetGroup
 
 
   # RDSインスタンス作成
   RDSInstance:
-    Type: "AWS::RDS::DBInstance"
+    Type: AWS::RDS::DBInstance
     Properties:
       # 設定したいDBインスタンス識別子
-      DBInstanceIdentifier: "database-2"
-      DBInstanceClass: "db.t3.micro"
+      DBInstanceIdentifier: database-2
+      DBInstanceClass: db.t3.micro
       Engine: MySQL
-      EngineVersion: "8.0.35"
-      MasterUsername: "admin2"
+      EngineVersion: 8.0.35
+      MasterUsername: admin2
       MasterUserPassword: !Ref DBPassword
-      DBName: "RDS2"
+      DBName: RDS2
       AvailabilityZone: ap-northeast-1a
       # パブリックアクセス
       PubliclyAccessible: false
@@ -70,21 +64,21 @@ Resources:
       - !Ref RDSSecurityGroup
       Tags:
       - Key: Name
-        Value: "raisetech2-lecture10-RDS"
+        Value: raisetech2-lecture10-RDS
 
 
   RDSSecurityGroup:
-    Type: "AWS::EC2::SecurityGroup"
+    Type: AWS::EC2::SecurityGroup
     Properties:
       VpcId: !ImportValue lecture10-VPC-VPCId
-      GroupName: "raisetech2-lecture10-RDS-sg"
-      GroupDescription: "for RDS"
+      GroupName: raisetech2-lecture10-RDS-sg
+      GroupDescription: for RDS
       Tags:
         - Key: Name
-          Value: "raisetech2-lecture10-RDS-sg"
+          Value: raisetech2-lecture10-RDS-sg
 
       SecurityGroupIngress:
         - IpProtocol: tcp
           FromPort: 3306
           ToPort: 3306
-          CidrIp: 10.1.0.0/16
+          SourceSecurityGroupId: !ImportValue lecture10-EC2-EC2SGId

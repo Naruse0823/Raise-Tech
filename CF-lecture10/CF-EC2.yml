@@ -9,12 +9,12 @@ Parameters:
   Default: raisetech2
 
  KeyName:
-  Description: "The name of the EC2 Key Pair"
+  Description: The name of the EC2 Key Pair
   Type: AWS::EC2::KeyPair::KeyName
-  ConstraintDescription: "Must be the name of an existing EC2 Key Pair."
+  ConstraintDescription: Must be the name of an existing EC2 Key Pair
 
  MyCidrIp:
-  NoEcho: 'true'
+  NoEcho: true
   Type: String
   Default: ""
 
@@ -28,7 +28,7 @@ Resources:
     VpcId: !ImportValue lecture10-VPC-VPCId
     Tags:
         - Key: Name
-          Value: !Sub "sg-ec2-lecture10-${NameBase}"
+          Value: !Sub ${NameBase}-sg-ec2-lecture10
     # インバウンドルール
     SecurityGroupIngress: 
      # ssh
@@ -41,7 +41,7 @@ Resources:
      - IpProtocol: tcp
        FromPort: 80
        ToPort: 80
-       CidrIp: 0.0.0.0/0
+       CidrIp: 10.1.0.0/16
 
 
  # EC2
@@ -52,10 +52,10 @@ Resources:
     ImageId: ami-0eda63ec8af4f056e
     # keypair
     KeyName: !Ref KeyName
-    InstanceType: "t2.micro" 
+    InstanceType: t2.micro
     NetworkInterfaces: 
-     - AssociatePublicIpAddress: "true" 
-       DeviceIndex: "0"
+     - AssociatePublicIpAddress: true
+       DeviceIndex: 0
        GroupSet:
         -  !Ref EC2SecurityGroup
        SubnetId: !ImportValue lecture10-VPC-PublicSubnet1Id
@@ -69,7 +69,7 @@ Resources:
     IamInstanceProfile: !Ref InstanceProfile
     Tags:
      - Key: Name
-       Value: !Sub "ec2-lecture10-${NameBase}"
+       Value: !Sub ${NameBase}-ec2-lecture10
 
 
  # IAM Instance Profile
@@ -77,12 +77,18 @@ Resources:
   Type: AWS::IAM::InstanceProfile
   Properties: 
     Roles: 
-      - "raisetech-lecture05-ec2"
+      - raisetech-lecture05-ec2
 
 
 Outputs: 
  EC2Id: 
-  Description: "The ID of the created EC2 instance"
+  Description: The ID of the created EC2 instance
   Value: !Ref EC2
   Export:
-   Name: !Sub "${AWS::StackName}-EC2Id"
+   Name: !Sub ${AWS::StackName}-EC2Id
+
+ EC2SGId:
+  Description: The ID of the created EC2 SecurityGroup
+  Value: !Ref EC2SecurityGroup
+  Export:
+   Name: !Sub ${AWS::StackName}-EC2SGId

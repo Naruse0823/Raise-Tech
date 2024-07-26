@@ -23,9 +23,9 @@
 ### 3. EC2
 - EC2  
 ![EC2](images/lecture10-2.png)
-![EC2](images/lecture10-2(2).png)
+![EC2(2)](images/lecture10-2(2).png)
 - EC2 sg
-![EC2](images/lecture10-2(3).png)
+![EC2 sg](images/lecture10-2(3).png)
   
 ### 4. ALB
 - ALB  

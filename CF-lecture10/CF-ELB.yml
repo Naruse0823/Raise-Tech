@@ -11,10 +11,10 @@ Parameters:
 Resources:
  # TargetGroup
  TargetGroup: 
-  Type: "AWS::ElasticLoadBalancingV2::TargetGroup"
+  Type: AWS::ElasticLoadBalancingV2::TargetGroup
   Properties: 
     VpcId: !ImportValue lecture10-VPC-VPCId
-    Name: !Sub "${NameBase}-tg"
+    Name: !Sub ${NameBase}-tg
     IpAddressType: ipv4
     # ターゲットにトラフィックをルーティングするために使用するプロトコル
     Protocol: HTTP
@@ -29,9 +29,9 @@ Resources:
     # ヘルスチェックプロトコル（ターゲットでヘルスチェックを実行するときにロードバランサーが使用するプロトコル）
     HealthCheckProtocol: HTTP
     # ヘルスチェックパス(ヘルスチェックのターゲットの送信先)
-    HealthCheckPath: "/"
+    HealthCheckPath: /
     # ヘルスチェックポート(ターゲットでヘルスチェックを実行するときにロードバランサーが使用するポート)
-    HealthCheckPort: "traffic-port"
+    HealthCheckPort: traffic-port
     # 正常のしきい値(非正常なインスタンスが正常であると見なすまでに必要なヘルスチェックの連続成功回数)
     HealthyThresholdCount: 5
     # 非正常のしきい値(ターゲットが異常であると見なされるまでに必要なヘルスチェックの連続失敗回数)
@@ -45,21 +45,21 @@ Resources:
       HttpCode: 200
     Tags: 
       - Key: Name
-        Value: !Sub "${NameBase}-tg"
+        Value: !Sub ${NameBase}-tg
 
 
  # ALB
  ALB: 
-    Type: "AWS::ElasticLoadBalancingV2::LoadBalancer"
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
     Properties: 
-      Name: !Sub "${NameBase}-alb"
+      Name: !Sub ${NameBase}-alb
       Tags: 
         - Key: Name
-          Value: !Sub "${NameBase}-alb"
+          Value: !Sub ${NameBase}-alb
       # ロードバランサの種類
       Type: application
       # スキーム(内部向けかインターネット向けか)
-      Scheme: "internet-facing"
+      Scheme: internet-facing
       # ロードバランサーの IP アドレスタイプ
       IpAddressType: ipv4
       SecurityGroups:
@@ -71,7 +71,7 @@ Resources:
 
  # リスナー設定
  ALBListener: 
-    Type: "AWS::ElasticLoadBalancingV2::Listener"
+    Type: AWS::ElasticLoadBalancingV2::Listener
     Properties: 
       LoadBalancerArn: !Ref ALB
       Port: 80
@@ -87,14 +87,14 @@ Resources:
 
  # ALBSecurityGroup
  ALBSecurityGroup:
-  Type: "AWS::EC2::SecurityGroup"
+  Type: AWS::EC2::SecurityGroup
   Properties:
     VpcId: !ImportValue lecture10-VPC-VPCId
     GroupDescription: Allow HTTP access
-    GroupName: !Sub "${NameBase}-alb-sg"
+    GroupName: !Sub ${NameBase}-alb-sg
     Tags:
         - Key: Name
-          Value: !Sub "${NameBase}-alb-sg"
+          Value: !Sub ${NameBase}-alb-sg
  # インバウンドルール
     SecurityGroupIngress: 
      - IpProtocol: tcp
