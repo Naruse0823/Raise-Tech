@@ -10,11 +10,6 @@ Parameters:
     MinLength: 8
     MaxLength: 41
 
-  KmsKeyArn:
-    NoEcho: true
-    Type: String
-    Default: ""
-
 
 Resources:
   # サブネットグループ作成
@@ -50,7 +45,8 @@ Resources:
       AllocatedStorage: 20
       # 暗号化
       StorageEncrypted: true
-      KmsKeyId: !Ref KmsKeyArn
+      # AWS管理キーを使用
+      KmsKeyId: alias/aws/rds
       # バックアップ保持期間を指定
       BackupRetentionPeriod: 1
       # スナップショットの作成
