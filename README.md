@@ -73,7 +73,7 @@ v17.9.1
 
 ## 学習記録
 現時点で完了している項目とこれからの学習予定についてまとめました。
-|講　座|概　要|課　題|課題ファイル|
+|講座|概要|課題|課題ファイル|
 |----|----|----|----|
 |第1回|・AWS、クラウド技術について <br> ・インフラエンジニアとは|・AWSアカウントを作成 <br> ・IAMの推奨設定(MFA,Billing,AdministratorAccess) <br> ・AmazonLinux2で作成したCloud9でHelloWorldを出力(Ruby)|Discord上で提出|
 |第2回|・バージョン管理システムについて <br> ・Gitの基本理解 <br> ・GitHub TIPS（Issue、Pull Request） <br> ・MarkDown記法|・GitHubアカウントを作成 <br> ・Cloud9のGit設定変更 <br> ・講座の感想をMarkdownで書き、GitHubでプルリクエストを発行|[leacture02.md](./lecture02.md)|
