@@ -2,23 +2,26 @@
 
 
 ## 概要
-- CRUD 処理が出来る簡単なRailsアプリケーションを稼働できるインフラストラクチャを構成しました。
-- Railsアプリケーションが動作するためのインフラリソース（EC2、RDS、S3など）は、AWS CloudFormationを使用して、自動で構築しました。
-- Railsアプリケーションの動作環境（Ruby、Nginx、Puma、データベースなど）は手動で設定しました。詳細は[lecture05](lecture05.md)に記載しております。
+- CRUD 処理が出来る簡単な[Railsアプリケーション](https://github.com/yuta-ushijima/raisetech-live8-sample-app)を稼働できるインフラストラクチャを構成しました。
+- Railsアプリケーションが動作するためのインフラリソース（VPC、EC2、RDSなど）は、AWS CloudFormationを使用して、自動で構築しました。
+- Railsアプリケーションの動作環境（Ruby、Nginx、Puma、MySQLなど）は手動で設定しました。
 - 動作環境の自動構築に関しては第12回、13回の講義で学習予定です。
 
 
 ## 環境構築の手順
 #### 1. CloudFormationによるインフラ自動構築
-1. CloudFormationのテンプレートファイルを用意
-2. AWS Management ConsoleでCloudFormationスタックを作成
+詳細は[lecture10](lecture10.md)に記載しております。
+1. CloudFormationのテンプレートファイルをyml形式で作成
+2. AWS Management ConsoleでCloudFormationスタックを作成(VPC、EC2、RDS、ALB、S3)
 3. スタックが正常に構築されたか確認
 
 #### 2. 手動でのRails動作環境構築
-1. EC2インスタンスにSSHで接続
+詳細は[lecture05](lecture05.md)に記載しております。
+1. 上記で作成したEC2インスタンスにSSHで接続
 2. 必要なソフトウェア（Ruby、Rails、Nginx など）をインストール
-3. データベースとの接続設定
-4. アプリケーションのデプロイ
+3. データベースとの接続設定と接続確認
+4. 組み込みサーバー(puma)のみで起動確認
+5. アプリケーションサーバー(puma)とWebサーバー(Nginx)に分けた状態で起動確認
 
 
 ## 動作環境
