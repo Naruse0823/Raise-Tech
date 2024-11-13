@@ -63,6 +63,7 @@ v17.9.1
 <br>
 
 ## インフラ構成図
+
 ![現時点での構成図](./images/readme-lecture10まで.png)
 <br>
 

@@ -28,6 +28,7 @@ sudo vi /etc/nginx/nginx.conf
 ```
 **【変更内容】**
 - userを`ec2-user`に変更
+
 ![1-nginx.conf](lecture05-images/readme-lecture05-4-1.png)
 <br>
 
@@ -39,6 +40,7 @@ sudo vi /etc/nginx/nginx.conf
 sudo touch /etc/nginx/conf.d/app.conf
 sudo vi /etc/nginx/conf.d/app.conf
 ```
+
 ![2-app.conf](lecture05-images/readme-lecture05-4-2.png)
 
 - Nginx の設定ファイル全体をチェックして正しいかどうかを確認
@@ -93,4 +95,5 @@ sudo systemctl restart nginx
 <br>
 
 ### ⑥再度、確認
+
 ![pumaとnginx](../images/lecture05-4.png)

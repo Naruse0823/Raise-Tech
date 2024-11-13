@@ -30,65 +30,83 @@
 
 ### 2. 作成手順
 - 「cloudformation」と検索し、「cloudformation」をクリック
+
 ![1-検索](./images/lecture10-9.png)
 - 「スタックの作成」または「スタックの作成→新しいリソースを使用」をクリック
+
 ![2-スタックの作成](./images/lecture10-10.png)
 - テンプレートの準備は「既存のテンプレートを選択」を選択
 - テンプレートソースは「テンプレートファイルのアップロード」を選択し、作成したファイルをアップロードしたら、「次へ」をクリック
+
 ![3-アップロード](./images/lecture10-11.png)
 - 「スタック名」を入力
 - 「パラメータ」をファイル内で設定した場合は、必要事項を設定し「次へ」をクリック
+
 ![4-スタック名・パラメータ](./images/lecture10-12.png)
 - 「任意のタグ」や「任意のアクセス許可」を設定
+
 ![5-タグ・アクセス許可](./images/lecture10-13.png)
 - プロビジョニング失敗時の動作は「すべてのスタックリソースをロールバックする」を選択
 - ロールバック中に新しく作成されたリソースを削除するについては「削除ポリシーを使用する」を選択
+
 ![6-スタックの失敗オプション](./images/lecture10-14.png)
 - 「詳細オプション」は必要があれば設定する
 - テンプレートファイルを用いてIAMリソースを作成する場合は、チェックボックスに「チェック」を入れ、「次へ」をクリック
+
 ![7-詳細オプション・IAM確認](./images/lecture10-15.png)
 - 最終確認をして、問題なければ「送信」をクリック
 - 画像のような状態になれば、作成完了
+
 ![8-作成完了画面](./images/lecture10-16.png)
 <br>
 
 ### 3. VPC
 - VPC  
+
 ![VPC](images/lecture10-1.png)
  <br>
  
 ### 4. EC2
 - EC2  
+
 ![EC2](images/lecture10-2.png)
 ![EC2(2)](images/lecture10-2(2).png)
 - EC2 sg
+
 ![EC2 sg](images/lecture10-2(3).png)
 <br>
 
 ### 5. ALB
 - ALB  
+
 ![ALB](images/lecture10-3.png)
 
 - target group  
+
 ![target group](images/lecture10-4.png)
 <br>
 
 ### 6. RDS
 - RDS  
+
 ![RDS](images/lecture10-5.png)
 - RDS sg
+
 ![RDS sg](images/lecture10-5(2).png)
 <br>
 
 ### 7. S3
 - S3  
+
 ![S3](images/lecture10-6.png)
 <br>
   
 ### 8. 接続確認
 - EC2  
+
 ![接続確認　EC2](images/lecture10-7.png)
 - RDS  
+
 ![接続確認　RDS](images/lecture10-8.png)
 <br>
   

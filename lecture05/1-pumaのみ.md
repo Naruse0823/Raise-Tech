@@ -216,10 +216,12 @@ cp config/database.yml.sample config/database.yml
   - パスワードをRDSのマスターパスワードに変更
   - `host: ”RDSのエンドポイント”`を追加
   - development と test の socket をコメントアウト
+
 ![1-database.ymlの接続先](lecture05-images/readme-lecture05-1-1.png)
 <br>
 
 ### ⑱EC2のセキュリティグループのインバウンドルールで、「ポート3000、作成したVPCのIPv4」を設定
+
 ![2-EC2のインバウンドルール](lecture05-images/readme-lecture05-1-2.png)
 <br>
 
@@ -276,8 +278,10 @@ Done in 0.21s.
 - 画像を表示させるため、 config/application.rb に`config.active_storage.variant_processor = :mini_magick`を追記  
 
 ※railsのversionが6から7以降にアップグレードした場合、デフォルトでvipsを使う設定になっているので、railsのバージョン7以降で imagemagick を使えるようにするには、`config.active_storage.variant_processor = :mini_magick`を追加する必要がある。
+
 ![3-application.rbに追記](lecture05-images/readme-lecture05-1-3.png)
 <br>
 
 ### ㉔再度、`bin/dev`→`localhost:3000`を行い、動作確認をする
+
 ![起動確認](../images/lecture05-1.png)

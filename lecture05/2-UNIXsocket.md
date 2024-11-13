@@ -10,6 +10,7 @@ pwd
 - `port ENV.fetch("PORT") { 3000 }`の先頭に「#」をつけてコメントアウト
 
 ※ポート3000をコメントアウトをしないと、UNIXsocketではなく、ポート3000での接続が優先されてしまう。
+
 ![1-puma.rbの設定](lecture05-images/readme-lecture05-2-1.png)
 <br>
 
@@ -18,6 +19,7 @@ pwd
 bundle exec puma -C config/puma.rb
 ```
 - 起動確認
+
 ![pumaのListen確認](../images/lecture05-2(1).png)
 <br>
 
@@ -26,4 +28,5 @@ bundle exec puma -C config/puma.rb
 # #curl --unix-socket <ソケットへのパス> http://localhost/
 curl --unix-socket /home/ec2-user/raisetech-live8-sample-app/tmp/sockets/puma.sock http://localhost/
 ```
+
 ![curlで確認](../images/lecture05-2(2).png)

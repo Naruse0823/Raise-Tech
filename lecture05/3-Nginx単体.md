@@ -32,8 +32,10 @@ sudo systemctl status nginx
 <br>
 
 ### ⑥EC2のセキュリティグループのインバウンドルールで、ポート3000を削除し、「ポート80、0.0.0.0/0」を追加
+
 ![1-ポート80の設定](./lecture05-images/readme-lecture05-3-1.png)
 <br>
 
 ### ⑦ブラウザのアドレスバーに`http://サーバーのパブリックIPアドレス`を入力して、起動しているか確認
+
 ![Nginx単体起動](../images/lecture05-3.png)
