@@ -12,7 +12,7 @@
 ## 概要
 - CRUD 処理が出来る簡単な[Railsアプリケーション](https://github.com/yuta-ushijima/raisetech-live8-sample-app)を稼働できるインフラストラクチャを構成しました。
 - Railsアプリケーションが動作するためのインフラリソース（VPC、EC2、RDSなど）は、AWS CloudFormationを使用して、自動で構築しました。詳細は[lecture10.md](./lecture10.md)を参照ください。
-- Railsアプリケーションの動作環境（Ruby、Nginx、Puma、MySQLなど）は手動で設定しました。詳細は[lecture5.md](./lecture5.md)を参照ください。
+- Railsアプリケーションの動作環境（Ruby、Nginx、Puma、MySQLなど）は手動で設定しました。詳細は[lecture05.md](./lecture05.md)を参照ください。
 - 動作環境の自動構築に関しては第12回、13回の講義で学習予定です。
 <br>
 
